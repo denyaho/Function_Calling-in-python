@@ -1,15 +1,16 @@
 import json
-from src.models import FunctionDefinition, ParamDefinition, ReturnDefinition
+from src.models import FunctionDefinition, ParamDefinition, ReturnDefinition, FunctionCall
 from pydantic import ValidationError
 
-def load_function_calling(filename: str):
+def load_prompts(filename: str):
     try:
         with open(filename, "r") as f:
             data = json.load(f)
         prompts = []
         for item in data:
+            print(item)
             prompts.append(
-                ParamDefinition(type = item["parameters"]["type"])
+                FunctionCall(prompt = item["prompt"])
             )
     except FileNotFoundError:
         print(f"File {filename} not found.")
@@ -37,7 +38,6 @@ def load_function_definitions(filename: str) -> list[FunctionDefinition]:
                     returns = ReturnDefinition(type = item["returns"]["type"])
                 )
             )
-        print(functions)
     except ValidationError as e:
         print(f"Validation error: {e}")
         return

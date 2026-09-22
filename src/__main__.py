@@ -1,4 +1,4 @@
-from src.loader import load_function_definitions
+from src.loader import load_function_definitions, load_prompts
 import argparse
 from pathlib import Path
 import sys
@@ -33,4 +33,8 @@ if __name__ == "__main__":
     output_path = OUTPUT_DIR + "/" + args.output.name
     
     function_definitions = load_function_definitions(functions_path)
+    prompts = load_prompts(input_path)
     print(function_definitions)
+    print(prompts)
+
+    
