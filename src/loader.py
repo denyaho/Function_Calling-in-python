@@ -1,20 +1,24 @@
 import json
-from src.models import FunctionDefinition, ParamDefinition, ReturnDefinition, FunctionCall
+from src.models import (
+    FunctionDefinition,
+    ParamDefinition,
+    ReturnDefinition,
+    FunctionCall,
+)
 from pydantic import ValidationError
 
-def load_prompts(filename: str):
+
+def load_prompts(filename: str) -> list[FunctionCall]:
     try:
         with open(filename, "r") as f:
             data = json.load(f)
         prompts = []
         for item in data:
             print(item)
-            prompts.append(
-                FunctionCall(prompt = item["prompt"])
-            )
+            prompts.append(FunctionCall(prompt=item["prompt"]))
     except FileNotFoundError:
         print(f"File {filename} not found.")
-        return 
+        return
     except json.JSONDecodeError:
         print(f"{filename} is not a valid JSON file.")
         return
@@ -32,10 +36,13 @@ def load_function_definitions(filename: str) -> list[FunctionDefinition]:
         for item in data:
             functions.append(
                 FunctionDefinition(
-                    name = item["name"],
-                    description = item["description"],
-                    parameters = {k: ParamDefinition(type = v["type"]) for k, v in item["parameters"].items()},
-                    returns = ReturnDefinition(type = item["returns"]["type"])
+                    name=item["name"],
+                    description=item["description"],
+                    parameters={
+                        k: ParamDefinition(type=v["type"])
+                        for k, v in item["parameters"].items()
+                    },
+                    returns=ReturnDefinition(type=item["returns"]["type"]),
                 )
             )
     except ValidationError as e:
@@ -43,7 +50,7 @@ def load_function_definitions(filename: str) -> list[FunctionDefinition]:
         return
     except FileNotFoundError:
         print(f"File {filename} not found.")
-        return 
+        return
     except json.JSONDecodeError:
         print(f"{filename} is not a valid JSON file.")
         return
@@ -51,4 +58,3 @@ def load_function_definitions(filename: str) -> list[FunctionDefinition]:
         print(f"Unexpected error: {e}")
         return
     return functions
-
