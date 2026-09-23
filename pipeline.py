@@ -10,14 +10,14 @@ class FunctionCaller:
     def add_definition(self, prompt: FunctionDefinition) -> str:
         new_prompts = (
             str(prompt)
-            + " Answer this question using this function definition"
+            + " Answer this question using this function definition "
             + str(self.definition)
         )
-        return new_prompts        
+        return new_prompts
 
     def constrained(self):
 
-    
+
     def run(self, prompts: list[FunctionCall]):
         for prompt in prompts:
             added_prompt = self.add_definition(prompt)
