@@ -1,5 +1,5 @@
 from llm_sdk import Small_LLM_Model
-from src.loader import FunctionDefinition, load_prompts, load_function_definitions
+from src.loader import FunctionDefinition, load_prompts, load_function_definitions, FunctionCall
 
 
 class FunctionCaller:
@@ -7,19 +7,25 @@ class FunctionCaller:
         self.model = Small_LLM_Model()
         self.definition = definition
 
-    def add_definition(self, prompt: FunctionDefinition):
+    def add_definition(self, prompt: FunctionDefinition) -> str:
         new_prompts = (
-            "Answer this "
-            + str(prompt)
-            + " based on these function definition"
+            str(prompt)
+            + " Answer this question using this function definition"
             + str(self.definition)
         )
-        return new_prompts
+        return new_prompts        
+
+    def constrained(self):
+
     
-    def run():
+    def run(self, prompts: list[FunctionCall]):
+        for prompt in prompts:
+            added_prompt = self.add_definition(prompt)
+            input_ids = self.model.encode(added_prompt)
 
 
 def run_pipeline(input_path: str, functions_path: str):
     prompts = load_prompts(input_path)
     definition = load_function_definitions(functions_path)
     caller = FunctionCaller(definition)
+    caller.run(prompts)

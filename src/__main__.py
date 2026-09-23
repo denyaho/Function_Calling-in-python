@@ -34,5 +34,4 @@ if __name__ == "__main__":
     input_path = INPUT_DIR + "/" + args.input.name
     output_path = OUTPUT_DIR + "/" + args.output.name
 
-    function_definitions = load_function_definitions(functions_path)
-    run_pipeline(input_path)
+    run_pipeline(input_path, functions_path)

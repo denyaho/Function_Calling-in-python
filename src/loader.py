@@ -14,7 +14,6 @@ def load_prompts(filename: str) -> list[FunctionCall]:
             data = json.load(f)
         prompts = []
         for item in data:
-            print(item)
             prompts.append(FunctionCall(prompt=item["prompt"]))
     except FileNotFoundError:
         print(f"File {filename} not found.")
