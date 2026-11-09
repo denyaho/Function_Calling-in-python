@@ -18,7 +18,7 @@ if __name__ == "__main__":
 
     # import json
     # with open(vocab_path, "r") as f:
-    #     vocab = json.load(f)
+    #     vocab = json.load(f)ge
     # print(f"Vocab size: {len(vocab)}")
     # print(f"First 100 vocab entries: {list(vocab.items())[:100]}")
 
