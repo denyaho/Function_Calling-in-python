@@ -18,10 +18,9 @@ if __name__ == "__main__":
 
     # import json
     # with open(vocab_path, "r") as f:
-    #     vocab = json.load(f)ge
+    #     vocab = json.load(f)
     # print(f"Vocab size: {len(vocab)}")
     # print(f"First 100 vocab entries: {list(vocab.items())[:100]}")
-
     # brackets = ["(", ")", "{", "}", "[", "]"]
     # forced_token_id = vocab["("]
     # for key, value in vocab.items():

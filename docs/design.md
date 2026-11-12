@@ -52,7 +52,6 @@
     }
 }
 
-
 ## 処理の分担
  
 1. CLI/main.py: 引数解析、実行管理
@@ -81,15 +80,20 @@
 6. において、logitsで不必要なものを-intfにして繰り返し出力させる
 
 ##　詳細設計
-ConstrainedDecoding
-
-関数
+クラス:FunctionCalling
+ calling: LLMに対し、関数定義を渡し出力を得る
+ 
+クラス:ConstrainedDecoding(state, input, transitions, start,accept)
  step(state, char): 1文字受け取って状態を進める
  walk(state, text): 複数文字を含むトークン全体を試す
  allowed(state, vocab): 許可できるトークンIDを集める
  generate: 候補として正しくないものを-intfにし、選んだトークンで状態を更新
+ advance(state, input): 現在のstateからinputを入力して遷移可能か確認する
 
 build_index -> BFDの形式で、現在の状態stateと次に移動できる候補をindexにまとめる
+
+## クラス設計
+
 
 ## 決めたことと理由
 

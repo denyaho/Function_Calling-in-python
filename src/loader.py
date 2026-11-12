@@ -2,7 +2,7 @@ import json
 from src.models import FunctionDefinition, ParamDefinition, ReturnDefinition
 from pydantic import ValidationError
 
-def load_function_calling(filename: str):
+def load_prompts(filename: str):
     try:
         with open(filename, "r") as f:
             data = json.load(f)
